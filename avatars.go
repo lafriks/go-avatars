@@ -13,7 +13,8 @@ import (
 	rendr_gg "github.com/lafriks/go-svg/renderer/gg"
 )
 
-func SVG(name string) ([]byte, error) {
+// SVG generates an SVG avatar using the given name as seed.
+func SVG(name string, opts ...Option) ([]byte, error) {
 	attrs, body := bottts.Generate(name)
 
 	res := bytes.Buffer{}
@@ -31,18 +32,27 @@ func SVG(name string) ([]byte, error) {
 	return res.Bytes(), nil
 }
 
-func PNG(name string) ([]byte, error) {
-	avatar, err := SVG(name)
+// PNG generates an PNG avatar using the given name as seed.
+func PNG(name string, opts ...Option) ([]byte, error) {
+	avatar, err := SVG(name, opts...)
 	if err != nil {
 		return nil, err
 	}
+
+	opt := options(opts...)
+
 	s, err := svg.Parse(bytes.NewReader(avatar), svg.IgnoreErrorMode)
 	if err != nil {
 		return nil, err
 	}
 
-	gc := gg.NewContext(256, 256)
-	rendr_gg.Draw(gc, s, renderer.Target(0, 0, 256, 256))
+	gc := gg.NewContext(opt.Size, opt.Size)
+	rendr_gg.Draw(gc, s, renderer.Target(
+		float64(opt.Padding),
+		float64(opt.Padding),
+		float64(opt.Size-opt.Padding*2),
+		float64(opt.Size-opt.Padding*2),
+	))
 
 	buf := bytes.NewBuffer(nil)
 	if err := png.Encode(buf, gc.Image()); err != nil {

@@ -20,6 +20,7 @@ func group(r *rnd.Random, content string, chance, x, y int) string {
 	return fmt.Sprintf(`<g transform="translate(%d, %d)">%s</g>`, x, y, content)
 }
 
+// Generate generates a bottts avatar.
 func Generate(seed string) (map[string]string, string) {
 	r := rnd.NewRandom(seed)
 
