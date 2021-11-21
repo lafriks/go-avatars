@@ -30,3 +30,8 @@ func (r *Random) Chance(n int) bool {
 func (r *Random) Pick(items []string) string {
 	return items[r.r.Intn(len(items))]
 }
+
+func (r *Random) PickColors(primary, secondary int) (string, string) {
+	color := r.Pick(colorNames)
+	return collection[color][primary], collection[color][secondary]
+}

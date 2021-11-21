@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"strings"
 
-	"github.com/lafriks/go-avatars/colors"
 	"github.com/lafriks/go-avatars/rnd"
 )
 
@@ -29,7 +28,7 @@ func Generate(seed string) (map[string]string, string) {
 		texture = textures[r.Pick(textureNames)]
 	}
 
-	primaryColor, secondaryColor := colors.PickColors(r, 600, 400)
+	primaryColor, secondaryColor := r.PickColors(600, 400)
 
 	body := []string{
 		group(r, sides[r.Pick(sideNames)](secondaryColor), sidesChance, 0, 66),

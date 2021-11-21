@@ -1,9 +1,7 @@
-package colors
+package rnd
 
 import (
 	"sort"
-
-	"github.com/lafriks/go-avatars/rnd"
 )
 
 var collection = map[string]map[int]string{
@@ -238,11 +236,6 @@ var collection = map[string]map[int]string{
 }
 
 var colorNames []string
-
-func PickColors(r *rnd.Random, primary, secondary int) (string, string) {
-	color := r.Pick(colorNames)
-	return collection[color][primary], collection[color][secondary]
-}
 
 func init() {
 	colorNames = make([]string, 0, len(collection))
