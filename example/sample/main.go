@@ -1,7 +1,6 @@
 package main
 
 import (
-	"bytes"
 	"image"
 	"image/draw"
 	"image/png"
@@ -16,12 +15,11 @@ func main() {
 	img := image.NewRGBA(image.Rect(0, 0, size*10, size*4))
 
 	for i := 0; i < 40; i++ {
-		seed := time.Now().Format(time.RFC3339Nano)
-		buf, err := avatars.PNG(seed, avatars.RenderSize(size))
+		a, err := avatars.Generate(time.Now().Format(time.RFC3339Nano))
 		if err != nil {
 			panic(err)
 		}
-		av, err := png.Decode(bytes.NewReader(buf))
+		av, err := a.Image(avatars.RenderSize(size))
 		if err != nil {
 			panic(err)
 		}

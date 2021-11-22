@@ -21,18 +21,18 @@ func main() {
 	}
 	seed := time.Now().Format(time.RFC3339Nano)
 
-	svg, err := avatars.SVG(seed)
+	a, err := avatars.Generate(seed)
 	if err != nil {
 		panic(err)
 	}
-	if err := ioutil.WriteFile("test.svg", svg, fs.FileMode(0644)); err != nil {
+	if err := ioutil.WriteFile("test.svg", a.SVG(), fs.FileMode(0644)); err != nil {
 		panic(err)
 	}
-	png, err := avatars.PNG(seed, avatars.RenderSize(size))
+	img, err := a.PNG(avatars.RenderSize(size))
 	if err != nil {
 		panic(err)
 	}
-	if err := ioutil.WriteFile("test.png", png, fs.FileMode(0644)); err != nil {
+	if err := ioutil.WriteFile("test.png", img, fs.FileMode(0644)); err != nil {
 		panic(err)
 	}
 }
