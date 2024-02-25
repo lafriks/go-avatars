@@ -25,14 +25,14 @@ func main() {
 	if err != nil {
 		panic(err)
 	}
-	if err := ioutil.WriteFile("test.svg", a.SVG(), fs.FileMode(0644)); err != nil {
+	if err := ioutil.WriteFile("test.svg", a.SVG(), fs.FileMode(0o644)); err != nil {
 		panic(err)
 	}
 	img, err := a.PNG(avatars.RenderSize(size))
 	if err != nil {
 		panic(err)
 	}
-	if err := ioutil.WriteFile("test.png", img, fs.FileMode(0644)); err != nil {
+	if err := ioutil.WriteFile("test.png", img, fs.FileMode(0o644)); err != nil {
 		panic(err)
 	}
 }

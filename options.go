@@ -1,8 +1,7 @@
 package avatars
 
 // Options for the avatar service.
-type Options struct {
-}
+type Options struct{}
 
 // Option is a function that applies an option to the avatar service.
 type Option interface {

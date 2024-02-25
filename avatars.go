@@ -67,12 +67,14 @@ func (a *Avatar) Image(opts ...RenderOption) (image.Image, error) {
 	opt := renderOptions(opts...)
 
 	gc := gg.NewContext(opt.Size, opt.Size)
-	rendr_gg.Draw(gc, s, renderer.Target(
+	if err := rendr_gg.Draw(gc, s, renderer.Target(
 		float64(opt.Padding),
 		float64(opt.Padding),
 		float64(opt.Size-opt.Padding*2),
 		float64(opt.Size-opt.Padding*2),
-	))
+	)); err != nil {
+		return nil, err
+	}
 
 	return gc.Image(), nil
 }
