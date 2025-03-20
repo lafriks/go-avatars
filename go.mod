@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/fogleman/gg v1.3.0
-	github.com/lafriks/go-svg v0.5.0
+	github.com/lafriks/go-svg v0.5.1
 )
 
 require (
